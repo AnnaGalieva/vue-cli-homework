@@ -1,17 +1,60 @@
 <template>
-  <ProductDetails />
+  <!-- <ProductDetails /> -->
+  <!-- <AddCount />
+  <AddCount />
+  <AddCount /> -->
+  <PaymentsDisplay :items="paymentList" :info="infoText" />
+  <AddList @addNewPay="addNewPay" />
 </template>
 
 <script>
-import ProductDetails from './components/ProductDetails.vue';
+import AddList from './components/AddList.vue';
+import PaymentsDisplay from './components/PaymentsDisplay.vue';
+
+//import AddCount from './components/AddCount.vue';
+//import ProductDetails from './components/ProductDetails.vue';
 
 
 
 export default {
   name: 'App',
   components: {
-    ProductDetails
-  }
+    PaymentsDisplay,
+    AddList
+  },
+  data() {
+    return {
+      paymentList: [],
+      infoText: 'new text info'
+    };
+  },
+  methods: {
+    fetchData() {
+      return [
+        {
+          date: '28.03.2020',
+          category: 'Food',
+          value: 169,
+        },
+        {
+          date: '24.03.2020',
+          category: 'Transport',
+          value: 360,
+        },
+        {
+          date: '24.03.2020',
+          category: 'Food',
+          value: 532,
+        },
+      ]
+    },
+    addNewPay(data) {
+      this.paymentList.push(data)
+    }
+  },
+  created() {
+    this.paymentList = this.fetchData();
+  },
 }
 </script>
 
